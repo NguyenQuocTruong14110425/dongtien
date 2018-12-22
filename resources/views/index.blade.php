@@ -11,7 +11,8 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="{{URL::asset('public/css/style.css')}}">
-
+        <link rel="stylesheet" href="{{URL::asset('public/css/assets.min613a.css')}}"/>
+        <link rel="stylesheet" href="{{URL::asset('public/css/styles5042.css')}}"/>
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.slim.min.js"></script>
@@ -167,7 +168,7 @@
             });
         </script>
     </head>
-    <body class="container">
+    <body cclass="moto-background">
         <h1>Demo canvas</h1>
         <button onclick="init()" class="btn btn-success">run</button>
         <button onclick="groupDragDemo('canvas')" class="btn btn-info">run 3d</button>

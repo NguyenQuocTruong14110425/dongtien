@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['namespace'=>'Client'],function() {
+    //home
+    Route::get('/', 'HomeController@index');
+    Route::get('/qua-tang-socola', 'HomeController@Socola');
 });
