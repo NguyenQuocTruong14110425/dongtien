@@ -1,4 +1,3 @@
-
 function Shape(x, y, w, h, fill) {
     this.x = x || 0;
     this.y = y || 0;
@@ -107,6 +106,7 @@ function CanvasState(canvas) {
     }, true);
 
     canvas.addEventListener('mouseup', function(e) {
+        console.log(myState);
         myState.dragging = false;
     }, true);
 
@@ -185,10 +185,88 @@ CanvasState.prototype.getMouse = function(e) {
     return {x: mx, y: my};
 }
 
+function initItem() {
+    var item1 = {
+        "id"  : 1,
+        "x": 149,
+        "y": 29,
+        "isTrue" : false,
+    };
+    var item2 = {
+        "id"  : 2,
+        "x": 235,
+        "y": 42,
+        "isTrue" : false
+    };
+    var item3 = {
+        "id"  : 3,
+        "x": 323,
+        "y": 55,
+        "isTrue" : false
+    };
+    var item4 = {
+        "id"  : 4,
+        "x": 415,
+        "y": 70,
+        "isTrue" : false
+    };
+    var item5 = {
+        "id"  : 5,
+        "x": 395,
+        "y": 162,
+        "isTrue" : false
+    };
+    var item6 = {
+        "id"  : 8,
+        "x": 378,
+        "y": 255,
+        "isTrue" : false
+    };
+    var item7 = {
+        "id"  : 9,
+        "x": 359,
+        "y": 349,
+        "isTrue" : false
+    };
+    var item8 = {
+        "id"  : 10,
+        "x": 266,
+        "y": 331,
+        "isTrue" : false
+    };
+    var item9 = {
+        "id"  : 11,
+        "x": 179,
+        "y": 314,
+        "isTrue" : false
+    };
+    var item10 = {
+        "id"  : 12,
+        "x": 92,
+        "y": 295,
+        "isTrue" : false
+    };
+    var item11 = {
+        "id"  : 13,
+        "x": 112,
+        "y": 206,
+        "isTrue" : false
+    };
+    var item12 = {
+        "id"  : 14,
+        "x": 130,
+        "y": 116,
+        "isTrue" : false
+    };
+    this.lstItem = [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12]
+}
+
 var canvas;
+var lstItem = [];
 function init() {
     var s = new CanvasState(document.getElementById('canvas'));
     this.canvas = s;
+    initItem();
     // s.addShape(new Shape(40,40,50,50)); // The default is gray
     // s.addShape(new Shape(60,140,40,60, 'lightskyblue'));
     // // Lets make some partially transparent
@@ -196,12 +274,30 @@ function init() {
     // s.addShape(new Shape(125,80,30,80, 'rgba(245, 222, 179, .7)'));
     // s.addShape(new Shape(14,20,50,80, 'rgba(255, 153, 255, .6)'));
     var img = document.getElementById("scream");
-    s.addImage(new Image(img,50,80));
-    s.addImage(new Image(img,150,200));
-    s.addImage(new Image(img,100,300));
-    s.addImage(new Image(img,10,250));
+    // s.addImage(new Image(img,50,80));
+    // s.addImage(new Image(img,150,200));
+    // s.addImage(new Image(img,100,300));
+    // s.addImage(new Image(img,10,250));
 }
-
+function addSocola() {
+    var img = document.getElementById("scream");
+    for(let i = 0 ; i < this.lstItem.length; i++)
+    {
+        if(this.lstItem[i].isTrue === false)
+        {
+            var item = {
+                "id"  : this.lstItem[i].id,
+                "x": this.lstItem[i].x,
+                "y": this.lstItem[i].y,
+                "isTrue" : true
+            };
+            this.lstItem.splice(i, 1,item);
+            console.log(this.lstItem)
+            this.canvas.addImage(new Image(img,this.lstItem[i].x,this.lstItem[i].y));
+            break;
+        }
+    }
+}
 function createShape(option) {
     switch (option) {
         case 'square':

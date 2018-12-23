@@ -23,9 +23,10 @@
                     </div>
                     <div class="col-sm-12 col-md-4">
                         <div class="list-item-socola">
-                            <button onclick="init()" class="btn btn-success">run</button>
                             <button onclick="createShape('socola')" class="btn btn-info">create element</button>
-                            <img id="scream" src="{{URL::asset('/public/images/valentine/socola.png')}}">
+                            <button onclick="addSocola()">
+                                <img id="scream" src="{{URL::asset('/public/images/valentine/socola.png')}}">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -45,4 +46,9 @@
 @endsection
 @section('script-footer')
     <script src="{{URL::asset('public/js/dongtien.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+          init();
+        })
+    </script>
 @endsection
