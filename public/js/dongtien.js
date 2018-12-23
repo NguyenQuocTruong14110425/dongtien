@@ -6,13 +6,14 @@ function Shape(x, y, w, h, fill) {
     this.fill = fill || '#AAAAAA';
 }
 
-function Image(img, x,y)
+function Image(img, x, y, id)
 {
     this.img = img;
     this.x = x || 0;
     this.y = y || 0;
     this.w = img.width || 1;
     this.h = img.height || 1;
+    this.id = id || -1;
 }
 
 Shape.prototype.draw = function(ctx) {
@@ -54,7 +55,6 @@ function CanvasState(canvas) {
     this.shapes = [];  // the collection of things to be drawn
     this.images = [];  // the collection of images
     this.dragging = false; // Keep track of when we are dragging
-
     this.selection = null;
     this.dragoffx = 0;
     this.dragoffy = 0;
@@ -71,13 +71,11 @@ function CanvasState(canvas) {
         for (var i = l-1; i >= 0; i--) {
             if (shapes[i].contains(mx, my)) {
                 var mySel = shapes[i];
-
                 myState.dragoffx = mx - mySel.x;
                 myState.dragoffy = my - mySel.y;
                 myState.dragging = true;
                 myState.selection = mySel;
                 myState.valid = false;
-
                 return;
             }
         }
@@ -87,6 +85,7 @@ function CanvasState(canvas) {
         }
     }
     canvas.addEventListener('mousedown', function(e) {
+        e.preventDefault()
         var mouse = myState.getMouse(e);
         var shapes = myState.shapes;
         var images = myState.images;
@@ -95,6 +94,7 @@ function CanvasState(canvas) {
     }, true);
 
     canvas.addEventListener('mousemove', function(e) {
+        e.preventDefault()
         if (myState.dragging){
             var mouse = myState.getMouse(e);
             // We don't want to drag the object by its top-left corner, we want to drag it
@@ -106,14 +106,193 @@ function CanvasState(canvas) {
     }, true);
 
     canvas.addEventListener('mouseup', function(e) {
-        console.log(myState);
+        e.preventDefault()
+        if (typeof e === 'object') {
+            switch (e.button) {
+                case 0:
+                    //Left button clicked
+                    PositionElement(e);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                   //Right button clicked.
+                    DeleteElement();
+                    break;
+                default:
+            }
+        }
         myState.dragging = false;
     }, true);
+    canvas.oncontextmenu = function (e) {
+        e.preventDefault();
+    };
+    function PositionElement(e) {
+        var mouse = myState.getMouse(e);
+        var images = myState.selection;
+        var postion = changePosionSocola(mouse,images);
+        if(postion !== false)
+        {
+            myState.selection.id = postion.id;
+            myState.selection.x = postion.x;
+            myState.selection.y = postion.y;
+        }
+        else
+        {
+            var tranfer = tranferPosionSocola(mouse,images);
+            if(tranfer !== false)
+            {
+                myState.selection.x = tranfer.x;
+                myState.selection.y = tranfer.y;
+                myState.selection.id = tranfer.id;
+                var images_new = myState.selection;
+                var compare_images = findImageInState(images_new.id);
+                var images_old_state = new Image(images.img,tranfer.x,tranfer.y,tranfer.id)
+                replaceImageState(compare_images,images_old_state.img,images_old_state);
+            }
+            else
+            {
+                var callback = callbackpostion(images)
+                myState.selection.x = callback.x;
+                myState.selection.y = callback.y;
+            }
+        }
+    }
 
-    // canvas.addEventListener('dblclick', function(e) {
-    //     var mouse = myState.getMouse(e);
-    //     myState.addShape(new Shape(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)'));
-    // }, true);
+    function removeSoola(ctx,images) {
+        ctx.clearRect(images.x, images.y, images.w, images.h);
+        this.canvas.removeImage(images);
+    }
+    function callbackpostion(images) {
+        for(let i = 0 ; i < this.lstItem.length; i++)
+        {
+            if( this.lstItem[i].id === images.id)
+            {
+                var item = {
+                    "id"  : this.lstItem[i].id,
+                    "x": this.lstItem[i].x,
+                    "y": this.lstItem[i].y,
+                };
+                return item;
+            }
+
+        }
+    }
+
+    function findSocolaInList(id) {
+        for(let i = 0 ; i < this.lstItem.length; i++)
+        {
+            if(this.lstItem[i].id === id)
+            {
+                return this.lstItem[i];
+            }
+        }
+        return false;
+    }
+    function findImageInState(id) {
+        for(let i = 0 ; i < myState.images.length; i++)
+        {
+            if(myState.images[i].id === id)
+            {
+                return myState.images[i];
+            }
+        }
+        return false;
+    }
+    function replaceImageState(images_old,img,new_pos_images) {
+        var images_old_state = new Image(img,new_pos_images.x,new_pos_images.y,new_pos_images.id)
+        this.canvas.changeImage(images_old,images_old_state);
+    }
+    function tranferPosionSocola(mouse , images) {
+        for(let i = 0 ; i < this.lstItem.length; i++)
+        {
+            if(this.lstItem[i].isTrue === true &&
+                this.lstItem[i].x < mouse.x && mouse.x < this.lstItem[i].x + images.w &&
+                this.lstItem[i].y < mouse.y && mouse.y < this.lstItem[i].y + images.h)
+            {
+                var images_old_state = findImageInState(this.lstItem[i].id)
+                var images_old = findSocolaInList(images.id)
+                if(images_old !== false && images_old_state !== false)
+                {
+                    replaceImageState(images, images_old_state.img, images_old);
+                    var item = {
+                        "id"  : this.lstItem[i].id,
+                        "x": this.lstItem[i].x,
+                        "y": this.lstItem[i].y,
+                        "isTrue" : true
+                    };
+                    this.lstItem.splice(i, 1,item);
+                    return item;
+                }
+            }
+        }
+        return false;
+    }
+
+    function changePosionSocola(mouse , images) {
+        for(let i = 0 ; i < this.lstItem.length; i++)
+        {
+            if(this.lstItem[i].isTrue === false &&
+               this.lstItem[i].x < mouse.x && mouse.x < this.lstItem[i].x + images.w &&
+               this.lstItem[i].y < mouse.y && mouse.y < this.lstItem[i].y + images.h)
+            {
+                var images_old = findSocolaInList(images.id)
+                if(images_old !== false)
+                {
+
+                    var item = {
+                        "id"  : this.lstItem[i].id,
+                        "x": this.lstItem[i].x,
+                        "y": this.lstItem[i].y,
+                        "isTrue" : true
+                    };
+                    this.lstItem.splice(i, 1,item);
+                    var item_old = {
+                        "id"  : images_old.id,
+                        "x": images_old.x,
+                        "y": images_old.y,
+                        "isTrue" : false
+                    };
+                    var pos = images_old.id - 1;
+                    this.lstItem.splice(pos, 1,item_old);
+                    return item;
+                }
+            }
+        }
+        return false;
+    }
+
+    function removeSocolaFromList(images)
+    {
+        for(let i = 0 ; i < this.lstItem.length; i++)
+        {
+            if( this.lstItem[i].id === images.id)
+            {
+                var item = {
+                    "id"  : this.lstItem[i].id,
+                    "x": this.lstItem[i].x,
+                    "y": this.lstItem[i].y,
+                    "isTrue" : false
+                };
+                this.lstItem.splice(i, 1,item);
+                break;
+            }
+        }
+    }
+
+    function DeleteElement()
+    {
+        if (myState.dragging) {
+            var ctx = myState.ctx;
+            var images = myState.selection;
+            removeSoola(ctx, images);
+            removeSocolaFromList(images);
+        }
+    }
+    canvas.addEventListener('dblclick', function(e) {
+        e.preventDefault()
+        //
+    }, true);
 
     this.selectionColor = '#CC0000';
     this.selectionWidth = 2;
@@ -128,6 +307,19 @@ CanvasState.prototype.addShape = function(shape) {
 CanvasState.prototype.addImage = function(image) {
     this.images.push(image);
     this.valid = false;
+}
+CanvasState.prototype.removeImage = function(image) {
+
+    var index = this.images.indexOf(image);
+    if (index > -1) {
+        this.images.splice(index, 1);
+    }
+}
+CanvasState.prototype.changeImage = function(image,image_news) {
+    var index = this.images.indexOf(image);
+    if (index > -1) {
+        this.images.splice(index, 1,image_news);
+    }
 }
 CanvasState.prototype.clear = function() {
     this.ctx.clearRect(0, 0, this.width, this.height);
@@ -279,8 +471,8 @@ function init() {
     // s.addImage(new Image(img,100,300));
     // s.addImage(new Image(img,10,250));
 }
-function addSocola() {
-    var img = document.getElementById("scream");
+function addSocola(idElement) {
+    var img = document.getElementById(idElement);
     for(let i = 0 ; i < this.lstItem.length; i++)
     {
         if(this.lstItem[i].isTrue === false)
@@ -292,27 +484,23 @@ function addSocola() {
                 "isTrue" : true
             };
             this.lstItem.splice(i, 1,item);
-            console.log(this.lstItem)
-            this.canvas.addImage(new Image(img,this.lstItem[i].x,this.lstItem[i].y));
+            this.canvas.addImage(new Image(img,this.lstItem[i].x,this.lstItem[i].y,this.lstItem[i].id));
             break;
         }
     }
 }
+
 function createShape(option) {
     switch (option) {
         case 'square':
-            this.canvas.addShape(new Shape(200,20,80,80, 'rgba(255, 153, 255, .6)'));
+            this.canvas.addShape(new Shape(200, 20, 80, 80, 'rgba(255, 153, 255, .6)'));
             break;
         case 'rectangle':
-            this.canvas.addShape(new Shape(100,200,100,50, 'rgba(255, 153, 255, .6)'));
+            this.canvas.addShape(new Shape(100, 200, 100, 50, 'rgba(255, 153, 255, .6)'));
             break;
         case 'socola':
             var img = document.getElementById("scream");
-            this.canvas.addImage(new Image(img,500,250));
+            this.canvas.addImage(new Image(img, 500, 250));
             break;
     }
-function createImage() {
-    
-}
-
 }

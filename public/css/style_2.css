@@ -2849,3 +2849,14 @@ input[type=text]::-ms-clear {
     margin-top: 50px;
     border: 2px solid #faf2cc;
 }
+.btn-socola
+{
+    background: none;
+    border: none;
+}
+.btn-socola:hover,
+.btn-socola:focus
+{
+    box-shadow: none;
+    border: none;
+}

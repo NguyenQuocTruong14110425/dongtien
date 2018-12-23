@@ -23,9 +23,12 @@
                     </div>
                     <div class="col-sm-12 col-md-4">
                         <div class="list-item-socola">
-                            <button onclick="createShape('socola')" class="btn btn-info">create element</button>
-                            <button onclick="addSocola()">
+                            {{--<button onclick="createShape('socola')" class="btn btn-info">create element</button>--}}
+                            <button onclick="addSocola('scream')" class="btn-socola">
                                 <img id="scream" src="{{URL::asset('/public/images/valentine/socola.png')}}">
+                            </button>
+                            <button onclick="addSocola('scream2')" class="btn-socola">
+                                <img id="scream2" src="{{URL::asset('/public/images/valentine/socola2.png')}}">
                             </button>
                         </div>
                     </div>
