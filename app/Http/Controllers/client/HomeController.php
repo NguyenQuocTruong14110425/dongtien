@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     function index()
     {
-        return view('client.home.index');
+        return view('client.home.index3');
     }
 
     function Socola()

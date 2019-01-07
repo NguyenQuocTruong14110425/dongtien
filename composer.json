@@ -34,7 +34,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "DongTien\\": "packages/dongtien/src"
+            "DongTien\\": "packages/dongtien/src",
+            "Entity\\": "packages/entity/src"
         },
         "classmap": [
             "database/seeds",

@@ -2860,3 +2860,11 @@ input[type=text]::-ms-clear {
     box-shadow: none;
     border: none;
 }
+
+@media only screen and (max-width: 768px) {
+   .left-sidebar,
+   .right-sidebar
+   {
+       display: none;
+   }
+}

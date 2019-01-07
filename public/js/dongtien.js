@@ -14,6 +14,7 @@ function Image(img, x, y, id)
     this.w = img.width || 1;
     this.h = img.height || 1;
     this.id = id || -1;
+    this.index = 0;
 }
 
 Shape.prototype.draw = function(ctx) {
@@ -26,7 +27,7 @@ Shape.prototype.contains = function(mx, my) {
 }
 
 Image.prototype.draw = function(ctx) {
-    ctx.drawImage(this.img ,this.x, this.y);
+    ctx.drawImage(this.img ,this.x, this.y, this.w, this.h);
 }
 Image.prototype.contains = function(mx, my) {
     return  (this.x <= mx) && (this.x + this.w >= mx) &&
@@ -84,28 +85,52 @@ function CanvasState(canvas) {
             myState.valid = false; // Need to clear the old selection border
         }
     }
-    canvas.addEventListener('mousedown', function(e) {
+    canvas.addEventListener('mousedown',EventDown, true);
+    canvas.addEventListener('touchstart',EventDown, true);
+
+    function EventDown(e)
+    {
         e.preventDefault()
         var mouse = myState.getMouse(e);
+        if(e.type === 'touchstart')
+        {
+            mouse =  myState.getTouch(e);
+        }
         var shapes = myState.shapes;
         var images = myState.images;
         moveElement(mouse,shapes);
         moveElement(mouse,images);
-    }, true);
+    }
+    canvas.addEventListener('mousemove',EventMove, true);
+    canvas.addEventListener('touchmove',EventMove, true);
 
-    canvas.addEventListener('mousemove', function(e) {
+    function EventMove(e)
+    {
         e.preventDefault()
         if (myState.dragging){
             var mouse = myState.getMouse(e);
+            if(e.type === 'touchmove')
+            {
+                mouse =  myState.getTouch(e);
+            }
             // We don't want to drag the object by its top-left corner, we want to drag it
             // from where we clicked. Thats why we saved the offset and use it here
             myState.selection.x = mouse.x - myState.dragoffx;
             myState.selection.y = mouse.y - myState.dragoffy;
+            myState.selection.index = 1;
+            myState.images.sort(compare);
             myState.valid = false; // Something's dragging so we must redraw
         }
-    }, true);
+    }
+    canvas.addEventListener('mouseup', EventUp, true);
+    canvas.addEventListener('touchend', EventUp, true);
 
-    canvas.addEventListener('mouseup', function(e) {
+    function EventUp(e)
+    {
+        if(e.type === 'touchend')
+        {
+            PositionElement(e);
+        }
         e.preventDefault()
         if (typeof e === 'object') {
             switch (e.button) {
@@ -116,19 +141,30 @@ function CanvasState(canvas) {
                 case 1:
                     break;
                 case 2:
-                   //Right button clicked.
+                    //Right button clicked.
                     DeleteElement();
                     break;
                 default:
             }
         }
         myState.dragging = false;
-    }, true);
+    }
     canvas.oncontextmenu = function (e) {
         e.preventDefault();
     };
+    function compare(a,b) {
+        if (a.index < b.index)
+            return -1;
+        if (a.index > b.index)
+            return 1;
+        return 0;
+    }
     function PositionElement(e) {
         var mouse = myState.getMouse(e);
+        if(e.type === 'touchend')
+        {
+            mouse = myState.getTouch(e);
+        }
         var images = myState.selection;
         var postion = changePosionSocola(mouse,images);
         if(postion !== false)
@@ -370,87 +406,153 @@ CanvasState.prototype.getMouse = function(e) {
 
     offsetX += this.stylePaddingLeft + this.styleBorderLeft + this.htmlLeft;
     offsetY += this.stylePaddingTop + this.styleBorderTop + this.htmlTop;
-
     mx = e.pageX - offsetX;
     my = e.pageY - offsetY;
 
     return {x: mx, y: my};
 }
 
+CanvasState.prototype.getTouch = function(e) {
+    var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
+    if (element.offsetParent !== undefined) {
+        do {
+            offsetX += element.offsetLeft;
+            offsetY += element.offsetTop;
+        } while ((element = element.offsetParent));
+    }
+    offsetX += this.stylePaddingLeft + this.styleBorderLeft + this.htmlLeft;
+    offsetY += this.stylePaddingTop + this.styleBorderTop + this.htmlTop;
+    var touches = e.changedTouches;
+    if(touches !== false &&  touches.length > 0)
+    {
+        mx = touches[0].pageX - offsetX;
+        my = touches[0].pageY - offsetY;
+    }
+    return {x: mx, y: my};
+}
 function initItem() {
     var item1 = {
         "id"  : 1,
-        "x": 149,
-        "y": 29,
+        "x": 354,
+        "y": 146,
         "isTrue" : false,
     };
     var item2 = {
         "id"  : 2,
-        "x": 235,
-        "y": 42,
+        "x": 431,
+        "y": 146,
         "isTrue" : false
     };
     var item3 = {
         "id"  : 3,
-        "x": 323,
-        "y": 55,
+        "x": 513,
+        "y": 148,
         "isTrue" : false
     };
     var item4 = {
         "id"  : 4,
-        "x": 415,
-        "y": 70,
+        "x": 592,
+        "y": 148,
         "isTrue" : false
     };
     var item5 = {
         "id"  : 5,
-        "x": 395,
-        "y": 162,
+        "x": 671,
+        "y": 151,
         "isTrue" : false
     };
     var item6 = {
         "id"  : 8,
-        "x": 378,
-        "y": 255,
+        "x": 354,
+        "y": 224,
         "isTrue" : false
     };
     var item7 = {
         "id"  : 9,
-        "x": 359,
-        "y": 349,
+        "x": 431,
+        "y": 224,
         "isTrue" : false
     };
     var item8 = {
         "id"  : 10,
-        "x": 266,
-        "y": 331,
+        "x": 511,
+        "y": 228,
         "isTrue" : false
     };
     var item9 = {
         "id"  : 11,
-        "x": 179,
-        "y": 314,
+        "x": 590,
+        "y": 228,
         "isTrue" : false
     };
     var item10 = {
         "id"  : 12,
-        "x": 92,
-        "y": 295,
+        "x": 670,
+        "y": 228,
         "isTrue" : false
     };
     var item11 = {
         "id"  : 13,
-        "x": 112,
-        "y": 206,
+        "x": 352,
+        "y": 304,
         "isTrue" : false
     };
     var item12 = {
         "id"  : 14,
-        "x": 130,
-        "y": 116,
+        "x": 430,
+        "y": 306,
         "isTrue" : false
     };
-    this.lstItem = [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12]
+    var item13 = {
+        "id"  : 14,
+        "x": 513,
+        "y": 306,
+        "isTrue" : false
+    };
+    var item14 = {
+        "id"  : 14,
+        "x": 592,
+        "y": 306,
+        "isTrue" : false
+    };
+    var item15 = {
+        "id"  : 14,
+        "x": 669,
+        "y": 306,
+        "isTrue" : false
+    };
+    var item16 = {
+        "id"  : 14,
+        "x": 352,
+        "y": 382,
+        "isTrue" : false
+    };
+    var item17 = {
+        "id"  : 14,
+        "x": 430,
+        "y": 385,
+        "isTrue" : false
+    };
+    var item18 = {
+        "id"  : 14,
+        "x": 510,
+        "y": 385,
+        "isTrue" : false
+    };
+    var item19 = {
+        "id"  : 14,
+        "x": 591,
+        "y": 385,
+        "isTrue" : false
+    };
+    var item20 = {
+        "id"  : 14,
+        "x": 670,
+        "y": 385,
+        "isTrue" : false
+    };
+    this.lstItem = [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,
+        item11,item12,item13,item14,item15,item16,item17,item18,item19,item20]
 }
 
 var canvas;
@@ -504,3 +606,4 @@ function createShape(option) {
             break;
     }
 }
+
