@@ -6,7 +6,7 @@ function Shape(x, y, w, h, fill) {
     this.fill = fill || '#AAAAAA';
 }
 
-function Image(img, x, y, id)
+function Image(img, x, y, id, price)
 {
     this.img = img;
     this.x = x || 0;
@@ -15,6 +15,7 @@ function Image(img, x, y, id)
     this.h = img.height || 1;
     this.id = id || -1;
     this.index = 0;
+    this.price = price;
 }
 
 Shape.prototype.draw = function(ctx) {
@@ -33,6 +34,8 @@ Image.prototype.contains = function(mx, my) {
     return  (this.x <= mx) && (this.x + this.w >= mx) &&
         (this.y <= my) && (this.y + this.h >= my);
 }
+
+
 
 function CanvasState(canvas) {
     this.canvas = canvas;
@@ -55,11 +58,11 @@ function CanvasState(canvas) {
     this.valid = false; // when set to false, the canvas will redraw everything
     this.shapes = [];  // the collection of things to be drawn
     this.images = [];  // the collection of images
+    this.totalPrice = 200;
     this.dragging = false; // Keep track of when we are dragging
     this.selection = null;
     this.dragoffx = 0;
     this.dragoffy = 0;
-
     var myState = this;
 
     canvas.addEventListener('selectstart', function(e) { e.preventDefault(); return false; }, false);
@@ -72,12 +75,19 @@ function CanvasState(canvas) {
         for (var i = l-1; i >= 0; i--) {
             if (shapes[i].contains(mx, my)) {
                 var mySel = shapes[i];
-                myState.dragoffx = mx - mySel.x;
-                myState.dragoffy = my - mySel.y;
-                myState.dragging = true;
-                myState.selection = mySel;
-                myState.valid = false;
-                return;
+                if(mySel.id !== -1)
+                {
+                    myState.dragoffx = mx - mySel.x;
+                    myState.dragoffy = my - mySel.y;
+                    myState.dragging = true;
+                    myState.selection = mySel;
+                    myState.valid = false;
+                    return;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
         if (myState.selection) {
@@ -132,7 +142,7 @@ function CanvasState(canvas) {
             PositionElement(e);
         }
         e.preventDefault()
-        if (typeof e === 'object') {
+        if (typeof e === 'object' && myState.dragging === true) {
             switch (e.button) {
                 case 0:
                     //Left button clicked
@@ -192,6 +202,7 @@ function CanvasState(canvas) {
                 myState.selection.x = callback.x;
                 myState.selection.y = callback.y;
             }
+
         }
     }
 
@@ -308,7 +319,8 @@ function CanvasState(canvas) {
                     "id"  : this.lstItem[i].id,
                     "x": this.lstItem[i].x,
                     "y": this.lstItem[i].y,
-                    "isTrue" : false
+                    "isTrue" : false,
+                    "price": this.lstItem[i].price,
                 };
                 this.lstItem.splice(i, 1,item);
                 break;
@@ -342,13 +354,19 @@ CanvasState.prototype.addShape = function(shape) {
 }
 CanvasState.prototype.addImage = function(image) {
     this.images.push(image);
+    this.totalPrice += image.price;
     this.valid = false;
+    document.getElementById("toltal-price").innerHTML =  this.totalPrice;
 }
+
+
 CanvasState.prototype.removeImage = function(image) {
 
     var index = this.images.indexOf(image);
     if (index > -1) {
         this.images.splice(index, 1);
+        this.totalPrice -= image.price;
+        document.getElementById("toltal-price").innerHTML =  this.totalPrice;
     }
 }
 CanvasState.prototype.changeImage = function(image,image_news) {
@@ -380,6 +398,7 @@ function drawElement(ctx,shapes)
 
     this.valid = true;
 }
+
 
 CanvasState.prototype.draw = function() {
 
@@ -430,148 +449,31 @@ CanvasState.prototype.getTouch = function(e) {
     }
     return {x: mx, y: my};
 }
-function initItem() {
-    var item1 = {
-        "id"  : 1,
-        "x": 354,
-        "y": 146,
-        "isTrue" : false,
-    };
-    var item2 = {
-        "id"  : 2,
-        "x": 431,
-        "y": 146,
-        "isTrue" : false
-    };
-    var item3 = {
-        "id"  : 3,
-        "x": 513,
-        "y": 148,
-        "isTrue" : false
-    };
-    var item4 = {
-        "id"  : 4,
-        "x": 592,
-        "y": 148,
-        "isTrue" : false
-    };
-    var item5 = {
-        "id"  : 5,
-        "x": 671,
-        "y": 151,
-        "isTrue" : false
-    };
-    var item6 = {
-        "id"  : 8,
-        "x": 354,
-        "y": 224,
-        "isTrue" : false
-    };
-    var item7 = {
-        "id"  : 9,
-        "x": 431,
-        "y": 224,
-        "isTrue" : false
-    };
-    var item8 = {
-        "id"  : 10,
-        "x": 511,
-        "y": 228,
-        "isTrue" : false
-    };
-    var item9 = {
-        "id"  : 11,
-        "x": 590,
-        "y": 228,
-        "isTrue" : false
-    };
-    var item10 = {
-        "id"  : 12,
-        "x": 670,
-        "y": 228,
-        "isTrue" : false
-    };
-    var item11 = {
-        "id"  : 13,
-        "x": 352,
-        "y": 304,
-        "isTrue" : false
-    };
-    var item12 = {
-        "id"  : 14,
-        "x": 430,
-        "y": 306,
-        "isTrue" : false
-    };
-    var item13 = {
-        "id"  : 14,
-        "x": 513,
-        "y": 306,
-        "isTrue" : false
-    };
-    var item14 = {
-        "id"  : 14,
-        "x": 592,
-        "y": 306,
-        "isTrue" : false
-    };
-    var item15 = {
-        "id"  : 14,
-        "x": 669,
-        "y": 306,
-        "isTrue" : false
-    };
-    var item16 = {
-        "id"  : 14,
-        "x": 352,
-        "y": 382,
-        "isTrue" : false
-    };
-    var item17 = {
-        "id"  : 14,
-        "x": 430,
-        "y": 385,
-        "isTrue" : false
-    };
-    var item18 = {
-        "id"  : 14,
-        "x": 510,
-        "y": 385,
-        "isTrue" : false
-    };
-    var item19 = {
-        "id"  : 14,
-        "x": 591,
-        "y": 385,
-        "isTrue" : false
-    };
-    var item20 = {
-        "id"  : 14,
-        "x": 670,
-        "y": 385,
-        "isTrue" : false
-    };
-    this.lstItem = [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,
-        item11,item12,item13,item14,item15,item16,item17,item18,item19,item20]
-}
 
 var canvas;
 var lstItem = [];
-function init() {
+function initSocola(listItem,idbackground) {
+    destroyCanvas();
     var s = new CanvasState(document.getElementById('canvas'));
     this.canvas = s;
-    initItem();
-    // s.addShape(new Shape(40,40,50,50)); // The default is gray
-    // s.addShape(new Shape(60,140,40,60, 'lightskyblue'));
-    // // Lets make some partially transparent
-    // s.addShape(new Shape(80,150,60,30, 'rgba(127, 255, 212, .5)'));
-    // s.addShape(new Shape(125,80,30,80, 'rgba(245, 222, 179, .7)'));
-    // s.addShape(new Shape(14,20,50,80, 'rgba(255, 153, 255, .6)'));
-    var img = document.getElementById("scream");
-    // s.addImage(new Image(img,50,80));
-    // s.addImage(new Image(img,150,200));
-    // s.addImage(new Image(img,100,300));
-    // s.addImage(new Image(img,10,250));
+    this.lstItem = listItem;
+    console.log(this.canvas);
+    var backgound = document.getElementById(idbackground);
+
+    // this.canvas.addBackground(new Background(backgound));
+    this.canvas.addImage(new Image(backgound,0,0,-1,0));
+
+
+}
+
+function destroyCanvas() {
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.beginPath();
+    ctx.restore();
 }
 function addSocola(idElement) {
     var img = document.getElementById(idElement);
@@ -583,15 +485,20 @@ function addSocola(idElement) {
                 "id"  : this.lstItem[i].id,
                 "x": this.lstItem[i].x,
                 "y": this.lstItem[i].y,
-                "isTrue" : true
+                "isTrue" : true,
+                "price" : this.lstItem[i].price
             };
             this.lstItem.splice(i, 1,item);
-            this.canvas.addImage(new Image(img,this.lstItem[i].x,this.lstItem[i].y,this.lstItem[i].id));
+            this.canvas.addImage(new Image(img,this.lstItem[i].x,this.lstItem[i].y,this.lstItem[i].id,this.lstItem[i].price));
             break;
         }
     }
 }
-
+function ScreenShoot() {
+    console.log(this.canvas)
+    var dataURL = this.canvas.canvas.toDataURL('png');
+    console.log(dataURL)
+}
 function createShape(option) {
     switch (option) {
         case 'square':
@@ -606,4 +513,3 @@ function createShape(option) {
             break;
     }
 }
-
