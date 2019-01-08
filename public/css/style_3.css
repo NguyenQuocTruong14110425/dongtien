@@ -261,6 +261,14 @@ html, body {
     margin: 25px 10px;
     padding-bottom: 40px;
 }
+.product:nth-child(2n+1) .content
+{
+    order: 2;
+}
+.product:nth-child(2n+1) .image-product
+{
+    order: 1;
+}
 .product .content
 {
     position: relative;

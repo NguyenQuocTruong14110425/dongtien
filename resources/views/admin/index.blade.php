@@ -1,6 +1,6 @@
 @extends('layout_admin.layout')
 @section('header-admin')
-    <title>dashboad</title>
+    <title>trang chủ</title>
 @endsection
 @section('content-admin')
         <div class="table-dt row">
@@ -10,9 +10,6 @@
                         <h2>table responsive</h2>
                         <p>Sử dụng thẻ form và add class <b style="color:#ffff00">.table-striped</b></p>
                     </div>
-                    @foreach($user as $data)
-                        <li>{{$data->name}}</li>
-                    @endforeach
                     <div class="card-body">
                         <div class="table-basic">
                             <table id="mytable" class="table table-bordered table-striped">

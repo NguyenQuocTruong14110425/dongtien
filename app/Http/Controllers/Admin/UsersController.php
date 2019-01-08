@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\NewsCategories;
-use Entity\Users\UsersEntity;
+use Entity\Users\NewsEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 class UsersController extends Controller
 {
 
-    public function __construct(UsersEntity $users)
+    public function __construct(NewsEntity $users)
     {
         $this->users = $users;
         $this->middleware('auth');

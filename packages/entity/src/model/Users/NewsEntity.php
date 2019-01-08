@@ -1,25 +1,25 @@
 <?php namespace Entity\News;
 
 use Entity\AbstractEntity;
-use Entity\Repository\News\NewsRepository;
+use Entity\Repository\News\ProductRepository;
 use Entity\EntityInterface;
-use Entity\Validation\News\NewsCreateValidator;
-use Entity\Validation\News\NewsUpdateValidator;
+use Entity\Validation\News\ProductCreateValidator;
+use Entity\Validation\News\ProductUpdateValidator;
 
 class NewsEntity extends AbstractEntity implements EntityInterface {
 
     /**
-     * @var NewsRepository
+     * @var ProductRepository
      */
     protected $repository;
 
     /**
-     * @var NewsCreateValidator
+     * @var ProductCreateValidator
      */
     protected $createValidator;
 
     /**
-     * @var NewsUpdateValidator
+     * @var ProductUpdateValidator
      */
     protected $updateValidator;
 
@@ -30,11 +30,11 @@ class NewsEntity extends AbstractEntity implements EntityInterface {
 
     /**
      * NewsEntity constructor.
-     * @param NewsRepository $repository
-     * @param NewsCreateValidator $createValidator
-     * @param NewsUpdateValidator $updateValidator
+     * @param ProductRepository $repository
+     * @param ProductCreateValidator $createValidator
+     * @param ProductUpdateValidator $updateValidator
      */
-    public function __construct(NewsRepository $repository, NewsCreateValidator $createValidator, NewsUpdateValidator $updateValidator)
+    public function __construct(ProductRepository $repository, ProductCreateValidator $createValidator, ProductUpdateValidator $updateValidator)
     {
         $this->repository = $repository;
         $this->createValidator = $createValidator;

@@ -26,6 +26,9 @@ Route::group(['namespace'=>'client'],function() {
 
 Route::group(['namespace'=>'Admin'],function() {
     Route::group(['prefix'=>'admin', 'as' => 'admin.'],function() {
+        //dashboard
+        Route::get('/', 'DashboardController@index');
+        Route::get('/dashboard', 'DashboardController@index');
         // user
         Route::get('/user/', 'UsersController@getList');
         Route::get('/user/detail/{id}', 'UsersController@getFind');
@@ -48,6 +51,7 @@ Route::group(['namespace'=>'Admin'],function() {
         Route::get('/news/trash/{id}', 'NewsController@getTrash');
         Route::get('/news/recover/{id}', 'NewsController@getRecover');
         Route::get('/news/delete/{id}', 'NewsController@getDelete');
+
         // categories
         Route::get('/categories/', 'NewsCategoriesController@getList');
         Route::get('/categories/detail/{id}', 'NewsCategoriesController@getFind');
@@ -103,6 +107,17 @@ Route::group(['namespace'=>'Admin'],function() {
         Route::get('/transactions/trash/{id}', 'TransactionsController@getTrash');
         Route::get('/transactions/recover/{id}', 'TransactionsController@getRecover');
         Route::get('/transactions/delete/{id}', 'TransactionsController@getDelete');
+        // news
+        Route::get('/product/', 'ProductController@getList');
+        Route::get('/product/detail/{id}', 'ProductController@getFind');
+        Route::get('/product/create', 'ProductController@getCreate');
+        Route::post('/product/create', 'ProductController@postCreate');
+        Route::get('/product/update/{id}', 'ProductController@getUpdate');
+        Route::put('/product/update/{id}', 'ProductController@postUpdate');
+        Route::get('/product/all-trash', 'ProductController@getAllTrash');
+        Route::get('/product/trash/{id}', 'ProductController@getTrash');
+        Route::get('/product/recover/{id}', 'ProductController@getRecover');
+        Route::get('/product/delete/{id}', 'ProductController@getDelete');
     });
 });
 Auth::routes();

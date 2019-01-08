@@ -1,4 +1,4 @@
-@charset "utf-8";
+right-item@charset "utf-8";
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700&subset=vietnamese');
 html,
 body {
@@ -35,7 +35,9 @@ header page
     list-style-type: none;
     margin: 0;
     padding: 0 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    display: inline-block;
+    width: 100%;
     background-color: #24292e;
     border-bottom: 1px solid #a9b3bc;
 }
@@ -75,6 +77,10 @@ header page
 {
     float: right;
 }
+#header .menu ul.topnav .right-item  .dropdown-menu
+{
+   background: #24292e;
+}
 #header .menu ul.topnav li.icon {display: none;}
 @media screen and (max-width:768px) {
     #header .menu ul.topnav li:not(:first-child) {
@@ -83,6 +89,15 @@ header page
     #header .menu ul.topnav li.icon {
         float: right;
         display: inline-block;
+    }
+    #header .menu ul.topnav
+    {
+        overflow: inherit;
+    }
+    #header .menu ul.topnav .right-item  .dropdown-menu
+    {
+        position: relative;
+        width: 100%;
     }
 }
 #header .menu ul.topnav.responsive {
@@ -2507,4 +2522,21 @@ Sell and buy
 .sell-buy .left-content .top-header .nav li a:hover .btn-close
 {
     color: #fb9678;
+}
+.upload-product
+{
+    position: relative;
+    cursor: pointer;
+}
+.upload-product:hover
+{
+    opacity: 0.8;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(112,112,112,1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(112,112,112,1);
+    box-shadow: 2px 2px 5px 0px rgba(112,112,112,1);
+}
+
+.input_upload
+{
+    display: none;
 }

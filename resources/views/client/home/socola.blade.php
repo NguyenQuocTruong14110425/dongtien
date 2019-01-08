@@ -42,80 +42,41 @@
                                 </div>
                             </div>
                             <div class="socola">
-                                <h3>Socola hình</h3>
+                                <h3>Kẹo viên in hình</h3>
                                 <div class="list-item-socola">
-                                    {{--<button onclick="createShape('socola')" class="btn btn-info">create element</button>--}}
-                                    <button onclick="addSocola('scream')" class="btn-socola">
-                                        <img id="scream" width="70" height="70" src="{{URL::asset('/public/images/socola/1.png')}}">
+                                    @foreach($products_01 as $product01)
+                                    <button onclick="addSocola('scream_{{$product01->id}}')" class="btn-socola">
+                                        <img id="scream_{{$product01->id}}" width="70" height="70"
+                                             src="{{URL::asset('/public/upload/' . $product01->product_avatar)}}">
                                     </button>
-                                    <button onclick="addSocola('scream2')" class="btn-socola">
-                                        <img id="scream2" width="70" height="70" src="{{URL::asset('/public/images/socola/2.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream3')" class="btn-socola">
-                                        <img id="scream3" width="70" height="70" src="{{URL::asset('/public/images/socola/3.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream4')" class="btn-socola">
-                                        <img id="scream4" width="70" height="70"  src="{{URL::asset('/public/images/socola/4.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream5')" class="btn-socola">
-                                        <img id="scream5" width="70" height="70" src="{{URL::asset('/public/images/socola/5.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream6')" class="btn-socola">
-                                        <img id="scream6" width="70" height="70" src="{{URL::asset('/public/images/socola/6.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream7')" class="btn-socola">
-                                        <img id="scream7" width="70" height="70" src="{{URL::asset('/public/images/socola/7.png')}}">
-                                    </button>
+                                    @endforeach
                                 </div>
-                                <h3>Socola hình 2</h3>
+                                <h3>Kẹo viên đen trắng</h3>
                                 <div class="list-item-socola">
-                                    {{--<button onclick="createShape('socola')" class="btn btn-info">create element</button>--}}
-                                    <button onclick="addSocola('scream')" class="btn-socola">
-                                        <img id="scream" width="70" height="70" src="{{URL::asset('/public/images/socola/1.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream2')" class="btn-socola">
-                                        <img id="scream2" width="70" height="70" src="{{URL::asset('/public/images/socola/2.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream3')" class="btn-socola">
-                                        <img id="scream3" width="70" height="70" src="{{URL::asset('/public/images/socola/3.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream4')" class="btn-socola">
-                                        <img id="scream4" width="70" height="70"  src="{{URL::asset('/public/images/socola/4.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream5')" class="btn-socola">
-                                        <img id="scream5" width="70" height="70" src="{{URL::asset('/public/images/socola/5.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream6')" class="btn-socola">
-                                        <img id="scream6" width="70" height="70" src="{{URL::asset('/public/images/socola/6.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream7')" class="btn-socola">
-                                        <img id="scream7" width="70" height="70" src="{{URL::asset('/public/images/socola/7.png')}}">
-                                    </button>
+                                    @foreach($products_02 as $product02)
+                                        <button onclick="addSocola('scream_{{$product02->id}}')" class="btn-socola">
+                                            <img id="scream_{{$product02->id}}" width="70" height="70"
+                                                 src="{{URL::asset('/public/upload/' . $product02->product_avatar)}}">
+                                        </button>
+                                    @endforeach
                                 </div>
-                                <h3>Socola hình 3</h3>
+                                <h3>Hoa Socola + hoa giả</h3>
                                 <div class="list-item-socola">
-                                    {{--<button onclick="createShape('socola')" class="btn btn-info">create element</button>--}}
-                                    <button onclick="addSocola('scream')" class="btn-socola">
-                                        <img id="scream" width="70" height="70" src="{{URL::asset('/public/images/socola/1.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream2')" class="btn-socola">
-                                        <img id="scream2" width="70" height="70" src="{{URL::asset('/public/images/socola/2.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream3')" class="btn-socola">
-                                        <img id="scream3" width="70" height="70" src="{{URL::asset('/public/images/socola/3.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream4')" class="btn-socola">
-                                        <img id="scream4" width="70" height="70"  src="{{URL::asset('/public/images/socola/4.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream5')" class="btn-socola">
-                                        <img id="scream5" width="70" height="70" src="{{URL::asset('/public/images/socola/5.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream6')" class="btn-socola">
-                                        <img id="scream6" width="70" height="70" src="{{URL::asset('/public/images/socola/6.png')}}">
-                                    </button>
-                                    <button onclick="addSocola('scream7')" class="btn-socola">
-                                        <img id="scream7" width="70" height="70" src="{{URL::asset('/public/images/socola/7.png')}}">
-                                    </button>
+                                    @foreach($products_03 as $product03)
+                                        <button onclick="addSocola('scream_{{$product03->id}}')" class="btn-socola">
+                                            <img id="scream_{{$product03->id}}" width="70" height="70"
+                                                 src="{{URL::asset('/public/upload/' . $product03->product_avatar)}}">
+                                        </button>
+                                    @endforeach
+                                </div>
+                                <h3>Khung ảnh socola</h3>
+                                <div class="list-item-socola">
+                                    @foreach($products_04 as $product04)
+                                        <button onclick="addSocola('scream_{{$product04->id}}')" class="btn-socola">
+                                            <img id="scream_{{$product04->id}}" width="70" height="70"
+                                                 src="{{URL::asset('/public/upload/' . $product04->product_avatar)}}">
+                                        </button>
+                                    @endforeach
                                 </div>
                             </div>
                     </div>

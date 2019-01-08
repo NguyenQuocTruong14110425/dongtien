@@ -19,5 +19,7 @@ return [
     'user_create_role' => 'Tạo mới nhóm quyền',
     //role - phân quyền
     'role_create' => 'Tạo mới quyền',
-
+    //product
+    'product_create'=>'Thêm mới',
+    'product_update'=>'Cập nhật',
 ];

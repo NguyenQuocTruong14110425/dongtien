@@ -8,11 +8,11 @@ use Entity\NewsCategories\NewsCategoriesEntity;
 use Entity\Resources\ResourcesEntity;
 use Entity\Roles\RolesEntity;
 use Entity\Transactions\TransactionsEntity;
-use Entity\Users\UsersEntity;
+use Entity\Users\NewsEntity;
 use Entity\Validation\Languages\LanguagesCreateValidator;
 use Entity\Validation\Languages\LanguagesUpdateValidator;
-use Entity\Validation\News\NewsCreateValidator;
-use Entity\Validation\News\NewsUpdateValidator;
+use Entity\Validation\News\ProductCreateValidator;
+use Entity\Validation\News\ProductUpdateValidator;
 use Entity\Validation\NewsCategories\NewsCategoriesUpdateValidator;
 use Entity\Validation\NewsCategories\NewsCategoriesCreateValidator;
 use Entity\Validation\Resources\ResourcesCreateValidator;
@@ -54,9 +54,9 @@ class EntityServiceProvider extends ServiceProvider
         $this->app->bind('Entity\NewsCategories\NewsEntity', function($app)
         {
             return new NewsEntity (
-                $app->make('Entity\Repository\News\NewsRepository'),
-                new NewsCreateValidator( $app['validator'] ),
-                new NewsUpdateValidator( $app['validator'] )
+                $app->make('Entity\Repository\News\ProductRepository'),
+                new ProductCreateValidator( $app['validator'] ),
+                new ProductUpdateValidator( $app['validator'] )
             );
         });
 
@@ -81,9 +81,9 @@ class EntityServiceProvider extends ServiceProvider
         });
 
         //users
-        $this->app->bind('Entity\Users\UsersEntity', function($app)
+        $this->app->bind('Entity\Users\NewsEntity', function($app)
         {
-            return new UsersEntity (
+            return new NewsEntity (
                 $app->make('Entity\Repository\Users\UsersRepository'),
                 new UsersCreateValidator( $app['validator'] ),
                 new UsersUpdateValidator( $app['validator'] )

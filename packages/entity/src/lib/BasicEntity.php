@@ -2,10 +2,9 @@
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 abstract class BasicEntity
 {
     protected  $entity;
@@ -167,30 +166,27 @@ abstract class BasicEntity
     public function UploadResource($resource,$type)
     {
         try {
-            $file = $resource['files'];
-            $x1 = $resource['x1'];
-            $y1 = $resource['y1'];
-            $w = $resource['w'];
-            $h = $resource['h'];
-            $pathSave = base_path('../public/upload/' . $type);
-            $fileName =  $type . '_' . $file->getClientOriginalName();
-            $fileNameThumb = $file->getClientOriginalName();
-            $pathThumb = base_path('../public/upload/thumb/' . $fileNameThumb);
-            $fileThumb = Image::make($file);
-            $fileThumb->crop($w,$h,$x1,$y1);
-            $fileThumb->resize($w/2,$h/2);
-            $fileThumb->save($pathThumb);
+            $file = $resource;
+            $pathSave = base_path('/public/upload/' . $type);
+            $fileName = time() . '_' .$file->getClientOriginalName();
             $file->move($pathSave, $fileName);
-            $result = [
-                "path"=> $type . '/' .$fileName ,
-                "path_thumb" => 'thumb/' . $fileNameThumb
-            ];
+            $result = $type . '/'. $fileName;
             return $result;
         }
         catch (Exception $e)
         {
             $this->error = $e->getMessage();
+            dd($this->error);
             return false;
+        }
+    }
+
+    public function DeleteResource($fileName)
+    {
+        $pathImage = base_path('/public/upload/' . $fileName);
+        if (File::exists($pathImage)) {
+            //File::delete($image_path);
+            unlink($pathImage);
         }
     }
     /**
@@ -198,11 +194,11 @@ abstract class BasicEntity
      * @return bool
      */
 
-    public function DeleteMutilRow(array $arrID)
+    public function DeleteMutilRow(array $arrID, $filename = null)
     {
         try
         {
-            if (empty($arrID) == false) {
+            if (isset($arrID) &&  count($arrID) > 0) {
                 $path = storage_path('logs/delete.txt');
                 $totalLine = count(file($path));
                 $cotent = "\r\n #". $totalLine . ':delete row from '. $this->primaryKey .' /id:' .implode(",", $arrID) .' from table /tb:' .$this->table .' at time /t:' . now();
@@ -210,6 +206,10 @@ abstract class BasicEntity
                     ->where('IsDelete','=',1)
                     ->whereIn($this->primaryKey,$arrID)
                     ->delete();
+                if(isset($filename))
+                {
+                    $this->DeleteResource($filename);
+                }
                 if($query == true)
                 {
                     $this->WriteLog($path,$cotent);

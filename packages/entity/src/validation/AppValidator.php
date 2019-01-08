@@ -29,13 +29,16 @@ abstract class AppValidator extends AbstractValidator {
     public function passes()
     {
         $validator = $this->validator->make($this->data, $this->rules);
-
+        if(isset($this->message))
+        {
+            $message = $this->message;
+            $validator = $this->validator->make($this->data, $this->rules,$message);
+        }
         if( $validator->fails() )
         {
-            $this->errors = $validator->messages();
+            $this->errors = $validator->messages()->messages();
             return false;
         }
-
         return true;
     }
 

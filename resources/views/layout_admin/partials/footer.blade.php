@@ -1,7 +1,6 @@
 <script src="{{URL::asset('public/js/bootstrap-tagsinput.js')}}"></script>
 <script src="{{URL::asset('public/js/app.admin.js')}}"></script>
 <script src="{{URL::asset('public/js/datatable.js')}}"></script>
-<script src="{{ asset('public/js/cropper.js') }}"></script>
 <script src="{{ asset('public/ckeditor/ckeditor.js') }}"></script>
 
 <script  type="text/javascript">

@@ -80,117 +80,21 @@
                     Hãy tham khảo những món quà tặng 14/2 ý nghĩa tại <a href="http://quatang1402.com">quatang1402.com</a> nhé.</p>
             </div>
         </div>
+        @foreach($products as $product)
         <div class="product row">
             <div class="content col-sm-12 col-md-6">
-                <h3>Chocolate Sweetheart</h3>
-                <p>Chocolate Destiny là sản phẩm độc đáo của Salty Love với sự kết hợp truyền thống của bộ đôi hoa hồng lung linh
-                    và socola ngọt ngào đặt trong chiếc hộp hình tim xinh xắn, rực rỡ kèm theo những lời nhắn nhủ đầy tình cảm "
-                    Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
+                <h3>{{$product->product_title}}</h3>
+                <p>{{$product->product_content}}</p>
                 <div class="button-group">
-                    <a href="#" class="btn btn-price">250,000 vnđ</a>
+                    <a href="#" class="btn btn-price">{{$product->product_price}} vnđ</a>
                     <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
                 </div>
             </div>
             <div class="image-product col-sm-12 col-md-6">
-                <img src="{{URL::asset('/public/images/product/01.jpg')}}">
+                <img src="{{URL::asset('/public/upload/'. $product->product_avatar)}}">
             </div>
         </div>
-        <div class="product row">
-            <div class="image-product col-sm-12 col-md-6">
-                <img src="{{URL::asset('/public/images/product/02.jpg')}}">
-            </div>
-            <div class="content col-sm-12 col-md-6">
-                <h3>Chocolate Sweetheart</h3>
-                <p>Chocolate Destiny là sản phẩm độc đáo của Salty Love với sự kết hợp truyền thống của bộ đôi hoa hồng lung linh
-                    và socola ngọt ngào đặt trong chiếc hộp hình tim xinh xắn, rực rỡ kèm theo những lời nhắn nhủ đầy tình cảm "
-                    Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
-                <div class="button-group">
-                    <a href="#" class="btn btn-price">1,235,000 vnđ</a>
-                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
-                </div>
-            </div>
-        </div>
-        <div class="product row">
-            <div class="content col-sm-12 col-md-6">
-                <h3>Chocolate Sweetheart</h3>
-                <p>Chocolate Destiny là sản phẩm độc đáo của Salty Love với sự kết hợp truyền thống của bộ đôi hoa hồng lung linh
-                    và socola ngọt ngào đặt trong chiếc hộp hình tim xinh xắn, rực rỡ kèm theo những lời nhắn nhủ đầy tình cảm "
-                    Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
-                <div class="button-group">
-                    <a href="#" class="btn btn-price">299,000 vnđ</a>
-                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
-                </div>
-            </div>
-            <div class="image-product col-sm-12 col-md-6">
-                <img src="{{URL::asset('/public/images/product/03.jpg')}}">
-            </div>
-        </div>
-        <div class="product row">
-            <div class="image-product col-sm-12 col-md-6">
-                <img src="{{URL::asset('/public/images/product/04.jpg')}}">
-            </div>
-            <div class="content col-sm-12 col-md-6">
-                <h3>Chocolate Sweetheart</h3>
-                <p>Chocolate Destiny là sản phẩm độc đáo của Salty Love với sự kết hợp truyền thống của bộ đôi hoa hồng lung linh
-                    và socola ngọt ngào đặt trong chiếc hộp hình tim xinh xắn, rực rỡ kèm theo những lời nhắn nhủ đầy tình cảm "
-                    Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
-                <div class="button-group">
-                    <a href="#" class="btn btn-price">500,000 vnđ</a>
-                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
-                </div>
-            </div>
-        </div>
-        <div class="product row">
-            <div class="content col-sm-12 col-md-6">
-                <h3>Chocolate Sweetheart</h3>
-                <p>Chocolate Destiny là sản phẩm độc đáo của Salty Love với sự kết hợp truyền thống của bộ đôi hoa hồng lung linh
-                    và socola ngọt ngào đặt trong chiếc hộp hình tim xinh xắn, rực rỡ kèm theo những lời nhắn nhủ đầy tình cảm "
-                    Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
-                <div class="button-group">
-                    <a href="#" class="btn btn-price">170,000 vnđ</a>
-                    <a href="#" class="btn btn-buy"  data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
-                </div>
-            </div>
-            <div class="image-product col-sm-12 col-md-6">
-                <img src="{{URL::asset('/public/images/product/05.jpg')}}">
-            </div>
-        </div>
-        <div class="future-new">
-            <div class="future-top">
-                <h3>Các chức năng nổi bật</h3>
-            </div>
-            <div class="future-body row">
-                <div class="col-sm-12 col-md-6">
-                    <a href="#">
-                        <img src="{{URL::asset('/public/images/icon_1.jpg')}}">
-                        <h4>Đặt hàng theo yêu cầu</h4>
-                    </a>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <a href="#">
-                        <img src="{{URL::asset('/public/images/icon_5.jpg')}}">
-                        <h4>Tạo câu chuyện tình yêu</h4>
-                    </a>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <a href="#">
-                        <img src="{{URL::asset('/public/images/icon_3.jpg')}}">
-                        <h4>Vòng quay valetine</h4>
-                    </a>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <a href="#">
-                        <img src="{{URL::asset('/public/images/icon_2.jpg')}}">
-                        <h4>Đặt thiệp</h4>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="body-bottom">
-            <p>Valentine có lẽ là một ngày tuyệt vời đối với các cặp đôi nhưng đối với dân FA thì đó
-                có lẽ sẽ là một ngày vô cùng thảm họa. Vậy làm sao để Valentine không còn là ngày tồi tệ mà lại trở thành một ngày
-                cực chất cho dân FA chúng ta! Hãy tham khảo ý những kiến của Salty Love nhé!</p>
-        </div>
+        @endforeach
     </section>
     <section id="footer">
         <h3>Happy Valentine!</h3>

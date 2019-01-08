@@ -61,4 +61,21 @@ return [
     //transaction
     'transactions_list_title' => 'Giao dịch mua & bán',
     'transactions_list' => 'Giao dịch mua & bán',
+
+    //product
+    'product_list'=> 'Danh sách sản phẩm',
+    'product'=> 'Sản phẩm',
+    'product_title' => 'Tên sản phẩm',
+    'product_create_title' => 'Thêm mới sản phẩm',
+    'product_update_title' => 'Cập nhật sản phẩm',
+    'product_description' => 'Mô tả',
+    'product_avatar' => 'Hình sản phẩm',
+    'product_keyword' => 'Từ khóa',
+    'product_content' => 'Nội dung',
+    'product_categories' => 'Danh mục',
+    'product_price' => 'Giá sản phẩm',
+    'product_price_sales' => 'Giá khuyến mãi',
+    'product_publish'=>'Trạng thái sản phẩm',
+    'product_status'=>'Trạng thái sản phẩm',
+    'product_view'=>'Lượt xem',
 ];
