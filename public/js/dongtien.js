@@ -495,9 +495,13 @@ function addSocola(idElement) {
     }
 }
 function ScreenShoot() {
-    console.log(this.canvas)
     var dataURL = this.canvas.canvas.toDataURL('png');
-    console.log(dataURL)
+    var a = document.getElementById('download');
+    a.href = dataURL;
+    downloadImage();
+}
+function downloadImage(){
+    document.getElementById('download').click();
 }
 function createShape(option) {
     switch (option) {

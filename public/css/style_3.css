@@ -49,6 +49,8 @@ html, body {
     margin-top: 15px;
     justify-content: center;
     text-align: center;
+    margin-left: 0;
+    margin-right: 0;
 }
 #header .top-header .logo
 {
@@ -111,6 +113,38 @@ html, body {
     display: inline-flex;
     margin-top: 30px;
 }
+@media only screen and (max-width: 786px) {
+    #header .menu-2
+    {
+        display: inline-block;
+        width: 100%;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        padding: 0 5px;
+    }
+    #header .menu-2 li
+    {
+        width: 100%;
+        margin-bottom: 15px;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+    #skype-svg,
+    #hotball-svg
+    {
+        display: none;
+    }
+    .product .content
+    {
+        order: 2;
+    }
+    .product .image-product
+    {
+        order: 1;
+    }
+}
 .menu-2 li
 {
     list-style: none;
@@ -132,6 +166,8 @@ html, body {
     text-decoration: none;
     color: #ffff;
     font-weight: bold;
+    width: 100%;
+    display: inline-block;
 }
 #body-bg
 {
@@ -247,6 +283,7 @@ html, body {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
+    text-align: justify;
 }
 
 .product .content .button-group
@@ -520,6 +557,19 @@ html, body {
     display: flex;
     margin-left: 60px;
 }
+.list-hop h3
+{
+    color: #FF4876;
+    font-weight: bold;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #D1D4DF;
+    width: 80%;
+    text-align: left;
+}
 .list-hop img
 {
     width: 200px;
@@ -549,6 +599,94 @@ html, body {
     justify-items: center;
     text-align: center;
     justify-content: center;
+}
+@media only screen and (max-width: 768px) {
+    .body-main
+    {
+        padding: 0 5px;
+        margin: 0;
+    }
+    .screen-dashboard .group-info
+    {
+        display: inline-block;
+    }
+    .list-hop
+    {
+        display: inline-block;
+        margin-left: 0;
+        justify-items: center;
+        text-align: center;
+    }
+    .screen-dashboard .button-canvas
+    {
+        position: relative !important;
+        right: inherit !important;
+        top: inherit !important;
+    }
+    .button-canvas .btn-screen
+    {
+
+        width: 100%;
+        background: #fff;
+        border: 2px dotted #1d75b3;
+        border-radius: 10px;
+        padding: 5px 25px;
+        font-weight: bold;
+        font-family: sans-serif;
+        cursor: pointer;
+        margin-bottom: 10px;
+        font-size: 17px !important;
+    }
+    .screen-dashboard .btn-addcart
+    {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 17px !important;
+    }
+    .screen-dashboard .group-info .price-socola
+    {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .screen-dashboard .group-info .price-socola h3
+    {
+        font-size: 17px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .list-hop img
+    {
+        margin: 20px 5px !important;
+    }
+    .screen-dashboard
+    {
+        overflow: hidden;
+    }
+    .input-group
+    {
+        margin-top: 20px;
+    }
+    .socola
+    {
+        padding-right: 10px ;
+    }
+    .socola h3
+    {
+        font-size: 17px !important;
+    }
+    .socola .list-item-socola
+    {
+        padding: 5px !important;
+    }
+    .socola .list-item-socola button
+    {
+        margin: 2px !important;
+    }
+    .socola .list-item-socola img
+    {
+        height: 50px;
+        width: 50px;
+    }
 }
 .screen-dashboard .group-info .price-socola
 {
@@ -867,4 +1005,9 @@ ball
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #FF4876;
+}
+
+.download-screen
+{
+    display: none;
 }

@@ -1,6 +1,6 @@
 @extends('layout_client.layout')
 @section('header-client')
-    <title>City Coin</title>
+    <title>Socola quà tặng 14/02</title>
 @endsection
 @section('content-client')
         <section id="header">
@@ -125,6 +125,7 @@
             <img onclick="changeBox('box01')" id="box01"  src="{{URL::asset('/public/images/hop/hop01.jpg')}}" >
             <img onclick="changeBox('box02')" id="box02"src="{{URL::asset('/public/images/hop/hop02.jpg')}}" >
             <img onclick="changeBox('box03')" id="box03" src="{{URL::asset('/public/images/hop/hop03.jpg')}}" >
+            <a href="#" id="download" class="download-screen" download>tải về</a>
         </div>
     <img class="may-2" src="{{URL::asset('/public/images/valentine/may2.png')}}"/>
 @endsection
@@ -278,12 +279,24 @@
         }
         var lstItem = initItem();
         $(document).ready(function(){
-            initSocola(lstItem,"hop1");
+            var lstBox = window.location.href.toString().split("#");
+            if(lstBox[1])
+            {
+                document.getElementById("hop1").src =  document.getElementById(lstBox[1]).src ;
+                initSocola(lstItem,"hop1");
+            }
+           else
+            {
+                initSocola(lstItem,"hop1");
+            }
         })
+
         function changeBox(idbox)
         {
-            document.getElementById("hop1").src =  document.getElementById(idbox).src ;
-            initSocola(lstItem,"hop1");
+            var url = "{{URL::to('/qua-tang-socola#')}}" + idbox;
+            console.log(url);
+            window.location.href = url;
+            window.location.reload(false);
         }
     </script>
 @endsection

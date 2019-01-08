@@ -1,6 +1,6 @@
 @extends('layout_client.layout')
 @section('header-client')
-    <title>City Coin</title>
+    <title>Socola quà tặng 14/02</title>
 @endsection
 @section('content-client')
     <section id="header">
@@ -22,22 +22,6 @@
                     <a href="{{URL::to('/lienhe')}}">Liên hệ</a>
                 </li>
             </ul>
-            {{--<div class="social col-sm-12 col-md-6">--}}
-            {{--<ul>--}}
-            {{--<li>--}}
-            {{--<a href="#"><i class="fab fa-facebook-f"></i></a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<a href="#"><i class="fab fa-twitter"></i></a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<a href="#"><i class="fab fa-instagram"></i></a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-            {{--<a href="#"><i class="fab fa-pinterest-p"></i></a>--}}
-            {{--</li>--}}
-            {{--</ul>--}}
-            {{--</div>--}}
         </div>
         <div class="container">
             <div class="image-avater">
@@ -46,9 +30,6 @@
         </div>
     </section>
     <div class="container">
-    <button id="topup-icon" class="display-obj">
-        <i class="fas fa-angle-up"></i>
-    </button>
     <section id="body-bg">
         <div class="qc-tt">
             <h3>Liên hệ để đặt hàng ngay 037.2136.156</h3>
@@ -107,7 +88,7 @@
                     Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
                 <div class="button-group">
                     <a href="#" class="btn btn-price">250,000 vnđ</a>
-                    <a href="#" class="btn btn-buy">Đặt hàng</a>
+                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
                 </div>
             </div>
             <div class="image-product col-sm-12 col-md-6">
@@ -125,7 +106,7 @@
                     Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
                 <div class="button-group">
                     <a href="#" class="btn btn-price">1,235,000 vnđ</a>
-                    <a href="#" class="btn btn-buy">Đặt hàng</a>
+                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
                 </div>
             </div>
         </div>
@@ -137,7 +118,7 @@
                     Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
                 <div class="button-group">
                     <a href="#" class="btn btn-price">299,000 vnđ</a>
-                    <a href="#" class="btn btn-buy">Đặt hàng</a>
+                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
                 </div>
             </div>
             <div class="image-product col-sm-12 col-md-6">
@@ -155,7 +136,7 @@
                     Just For You" sẽ khiến người ấy tan chảy trước sự ngọt ngào và lãng mạn của bạn.</p>
                 <div class="button-group">
                     <a href="#" class="btn btn-price">500,000 vnđ</a>
-                    <a href="#" class="btn btn-buy">Đặt hàng</a>
+                    <a href="#" class="btn btn-buy" data-toggle="modal" data-target="#exampleModal">Đặt hàng</a>
                 </div>
             </div>
         </div>
@@ -216,13 +197,13 @@
         <div class="footer-line"></div>
         <p>Copyright © Sweet Valentine Group. All Rights Reserved.</p>
     </section>
-    <svg preserveAspectRatio="xMinYMin meet">
+    <svg id="skype-svg" preserveAspectRatio="xMinYMin meet">
     <image  class="cloud" width="150"  xlink:href="{{URL::asset('/public/images/valentine/may.png')}}" />
     <image  class="cloud" width="350"  xlink:href="{{URL::asset('/public/images/valentine/may.png')}}" />
     <image  class="cloud" width="300"  xlink:href="{{URL::asset('/public/images/valentine/may.png')}}" />
     <image  class="cloud" width="230"  xlink:href="{{URL::asset('/public/images/valentine/may.png')}}" />
     </svg>
-    <svg preserveAspectRatio="xMinYMin meet">
+    <svg id="hotball-svg" preserveAspectRatio="xMinYMin meet">
         <image  class="hotball" width="250"  xlink:href="{{URL::asset('/public/images/valentine/khinhkhicau.png')}}" />
         <image  class="hotball" width="150"  xlink:href="{{URL::asset('/public/images/valentine/khinhkhicau.png')}}" />
     </svg>
@@ -264,49 +245,7 @@
 </div>
 @endsection
 @section('script-footer')
-    <script>
-        var src = "{{URL::asset('/public/images/valentine/khinhkhicau.png')}}";
-        var src2 = "{{URL::asset('/public/images/valentine/may.png')}}";
-        var khinhkhicau = createElement(src,"kk1",null,200,-20,50,150);
-        var may = createElement(src2,"may1","sky",150,0,300,150);
-        // document.getElementById("image-hi").innerHTML = may + khinhkhicau;
-        
-        function createElement(src, id,classi, width, rotate, top, left) {
-            var stype_main = " position: absolute;top:" + top + "px;left:" + left + "px";
-            var stype = "width:" + width + "px;height:auto; transform: rotate("+ rotate +"deg);" + stype_main;
-            var elements;
-            if(classi == null)
-            {
-                elements = "<img id = " + id + " style='" + stype +"' src = '" + src +"'/>";
-            }
-            else
-            {
-                elements = "<img class='"+ classi + "' id = " + id + " style='" + stype +"' src = '" + src +"'/>";
-            }
-            return elements;
-        }
-        var flag = 1;
-        var pos_top = 0;
-        function amimation() {
-            var top = 300;
-            var left = 150;
-
-            var elem = document.getElementById("may1");
-            var time = new Date().getSeconds();
-
-            if(time === 59)
-            {
-                flag = -1;
-            }
-            if(time === 1) {
-                flag = 1;
-            }
-            pos_top = pos_top + flag*10*time;
-            console.log(time);
-            elem.style.top = pos_top + "px";
-            elem.style.left = left + "px";
-        }
-    </script>
+    <script async src="{{URL::asset('public/js/TweenMax.min.js')}}"></script>
     <script>
         (function($) {
         $.fn.visible = function(partial) {
@@ -462,4 +401,151 @@
             }
         }
     </script>
+@endsection
+    @section('script-footer')
+        <script async src="{{URL::asset('public/js/TweenMax.min.js')}}"></script>
+        <script>
+            (function($) {
+                $.fn.visible = function(partial) {
+
+                    var $t            = $(this),
+                        $w            = $(window),
+                        viewTop       = $w.scrollTop(),
+                        viewBottom    = viewTop + $w.height(),
+                        _top          = $t.offset().top,
+                        _bottom       = _top + $t.height(),
+                        compareTop    = partial === true ? _bottom : _top,
+                        compareBottom = partial === true ? _top : _bottom;
+
+                    return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+
+                };
+            })(jQuery);
+        </script>
+        <script>
+            $(document).ready(function() {
+                intBall();
+                var allMods = $(".product .image-product");
+                var allMods1 = $(".product .content");
+
+                allMods.each(function(i, el) {
+                    var el = $(el);
+                    if (el.visible(true)) {
+                        el.addClass("already-visible");
+                    }
+                });
+
+                allMods1.each(function(i, el) {
+                    var el = $(el);
+                    if (el.visible(true)) {
+                        el.addClass("already-hevi");
+                    }
+                });
+                $(window).trigger('scroll');
+                $(window).bind('scroll', function () {
+                    $(".product .image-product").each(function(i, el) {
+                        var el = $(el);
+                        if (el.visible(true)) {
+                            el.addClass("come-in");
+                        }
+                    });
+                    $(".product .content").each(function(i, el) {
+                        var el = $(el);
+                        if (el.visible(true)) {
+                            el.addClass("come-left");
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+            function intBall()
+            {
+                TweenLite.defaultEase = Linear.easeNone;
+                TweenLite.lagSmoothing(33, 16);
+
+                var vw = window.innerWidth;
+                var vh = window.innerHeight;
+                var firstRun = true;
+
+                $(".cloud").each(function (i, cloud) {
+                    animateCloud(cloud);
+                });
+
+                $(".hotball").each(function (i, ball) {
+                    animateHotBall(ball);
+                });
+
+                firstRun = false;
+                TweenLite.set("svg", { attr: { viewBox: [0, 0, vw, vh].join(" ") } });
+                TweenLite.to("svg", 0.25, { autoAlpha: 1 });
+
+                function animateCloud(cloud) {
+
+                    var time = random(50, 200);
+                    var delay = random(5);
+
+                    var width = cloud.getAttribute("width") * 0.1;
+                    var dist = vw + width;
+                    var speed = (dist * 1000 / time);
+                    var fade = width / speed;
+
+                    TweenLite.set(cloud, {
+                        autoAlpha: 0,
+                        scale: random(0.5, 1),
+                        x: -width,
+                        y: random(0, vh - 100) }
+                    );
+
+
+                    var tl = new TimelineLite({
+                        onComplete: animateCloud,
+                        onCompleteParams: [cloud] });
+
+
+                    tl.add("start", delay).
+                    to(cloud, time, { x: dist}, "start").
+                    to(cloud, fade, { autoAlpha: 1 }, "start+=" + fade / 2).
+                    to(cloud, fade, { autoAlpha: 0 }, "-=" + fade * 2);
+
+                    if (firstRun) tl.progress(random(0.9));
+                }
+                function animateHotBall(ball) {
+
+                    var time = random(5, 150);
+                    var delay = random(10);
+
+                    var height = ball.getAttribute("height") * 1;
+                    var dist = vh + height;
+                    var speed = (dist * 1000 / time);
+                    var fade = height / speed;
+
+                    TweenLite.set(ball, {
+                        autoAlpha: 0,
+                        scale: random(0.5, 1),
+                        x: random(0, vw - 20) ,
+                        y: random(0, vh - 20),
+                    });
+
+
+                    var tl = new TimelineLite({
+                        onComplete: animateHotBall,
+                        onCompleteParams: [ball] });
+
+
+                    tl.add("start", delay).
+                    to(ball, time, { y: dist }, "start").
+                    to(ball, fade, { autoAlpha: 1 }, "start+=" + fade / 2).
+                    to(ball, fade, { autoAlpha: 0 }, "-=" + fade * 2);
+
+                    if (firstRun) tl.progress(random(0.9));
+                }
+
+
+                function random(min, max) {
+                    if (max == null) {max = min;min = 0;}
+                    return Math.random() * (max - min) + min;
+                }
+            }
+        </script>
 @endsection

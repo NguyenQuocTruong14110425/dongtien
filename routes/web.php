@@ -18,7 +18,7 @@ Route::get('language/{locale}', function ($locale) {
     return redirect( url()->previous());
 });
 
-Route::group(['namespace'=>'Client'],function() {
+Route::group(['namespace'=>'client'],function() {
     //home
     Route::get('/', 'HomeController@index');
     Route::get('/qua-tang-socola', 'HomeController@Socola');
