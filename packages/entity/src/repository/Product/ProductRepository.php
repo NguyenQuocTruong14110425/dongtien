@@ -1,4 +1,4 @@
-<?php namespace Entity\Repository\product;
+<?php namespace Entity\Repository\Product;
 
 use App\Product;
 use Entity\Repository\RepositoryInterface;

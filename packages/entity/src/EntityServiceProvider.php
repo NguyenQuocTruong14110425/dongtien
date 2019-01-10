@@ -5,16 +5,19 @@ namespace Entity;
 use Entity\Languages\LanguagesEntity;
 use Entity\News\NewsEntity;
 use Entity\NewsCategories\NewsCategoriesEntity;
+use Entity\Product\ProductEntity;
 use Entity\Resources\ResourcesEntity;
 use Entity\Roles\RolesEntity;
 use Entity\Transactions\TransactionsEntity;
-use Entity\Users\NewsEntity;
+use Entity\Users\UsersEntity;
 use Entity\Validation\Languages\LanguagesCreateValidator;
 use Entity\Validation\Languages\LanguagesUpdateValidator;
-use Entity\Validation\News\ProductCreateValidator;
-use Entity\Validation\News\ProductUpdateValidator;
+use Entity\Validation\News\NewsCreateValidator;
+use Entity\Validation\News\NewsUpdateValidator;
 use Entity\Validation\NewsCategories\NewsCategoriesUpdateValidator;
 use Entity\Validation\NewsCategories\NewsCategoriesCreateValidator;
+use Entity\Validation\Product\ProductCreateValidator;
+use Entity\Validation\Product\ProductUpdateValidator;
 use Entity\Validation\Resources\ResourcesCreateValidator;
 use Entity\Validation\Resources\ResourcesUpdateValidator;
 use Entity\Validation\Roles\RolesCreateValidator;
@@ -54,9 +57,9 @@ class EntityServiceProvider extends ServiceProvider
         $this->app->bind('Entity\NewsCategories\NewsEntity', function($app)
         {
             return new NewsEntity (
-                $app->make('Entity\Repository\News\ProductRepository'),
-                new ProductCreateValidator( $app['validator'] ),
-                new ProductUpdateValidator( $app['validator'] )
+                $app->make('Entity\Repository\News\NewsRepository'),
+                new NewsCreateValidator( $app['validator'] ),
+                new NewsUpdateValidator( $app['validator'] )
             );
         });
 
@@ -81,9 +84,9 @@ class EntityServiceProvider extends ServiceProvider
         });
 
         //users
-        $this->app->bind('Entity\Users\NewsEntity', function($app)
+        $this->app->bind('Entity\Users\ UsersEntity', function($app)
         {
-            return new NewsEntity (
+            return new  UsersEntity (
                 $app->make('Entity\Repository\Users\UsersRepository'),
                 new UsersCreateValidator( $app['validator'] ),
                 new UsersUpdateValidator( $app['validator'] )
@@ -108,6 +111,15 @@ class EntityServiceProvider extends ServiceProvider
                 $app->make('Entity\Repository\Transactions\TransactionsRepository'),
                 new TransactionsCreateValidator( $app['validator'] ),
                 new TransactionsUpdateValidator( $app['validator'] )
+            );
+        });
+        //product
+        $this->app->bind('Entity\Product\ProductEntity', function($app)
+        {
+            return new ProductEntity (
+                $app->make('Entity\Repository\Product\ProductRepository'),
+                new  ProductCreateValidator( $app['validator'] ),
+                new  ProductUpdateValidator( $app['validator'] )
             );
         });
     }

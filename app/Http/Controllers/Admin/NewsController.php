@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\NewsCategories;
-use Entity\News\NewsEntity;
+use Entity\News\UsersEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class NewsController extends Controller
 {
 
-    public function __construct(NewsEntity $news)
+    public function __construct(UsersEntity $news)
     {
         $this->news = $news;
     }
