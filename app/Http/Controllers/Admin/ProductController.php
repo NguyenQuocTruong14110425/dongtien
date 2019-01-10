@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Entity\Product\ProductEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -53,7 +54,8 @@ class ProductController extends Controller
     }
     public function getCreate()
     {
-        return view('admin.product.create');
+        $data = $this->getFileData('data.php');
+        return view('admin.product.create',["data_category" => $data["data_category"]]);
     }
 
     public function postCreate(Request $request)
@@ -86,7 +88,9 @@ class ProductController extends Controller
     public function getUpdate($id)
     {
         $product_destail=  $this->product->find($id);
-        return view('admin.product.update',['product_destail'=>$product_destail]);
+        $data = $this->getFileData('data.php');
+        return view('admin.product.update',['product_destail'=>$product_destail,
+            "data_category" => $data["data_category"]]);
     }
 
     public function postUpdate(Request $request ,$id)
@@ -136,5 +140,11 @@ class ProductController extends Controller
     {
         $product=  $this->product->delete($id);
         return redirect('admin/product/all-trash');
+    }
+
+    private function getFileData($filename)
+    {
+        $path = storage_path('data/' . $filename);
+        return require  $path;
     }
 }

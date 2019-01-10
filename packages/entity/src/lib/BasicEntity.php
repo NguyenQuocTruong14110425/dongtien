@@ -180,7 +180,6 @@ abstract class BasicEntity
             return false;
         }
     }
-
     public function DeleteResource($fileName)
     {
         $pathImage = base_path('/public/upload/' . $fileName);

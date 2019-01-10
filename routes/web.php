@@ -22,7 +22,7 @@ Route::group(['namespace'=>'client'],function() {
     //home
     Route::get('/', 'HomeController@index');
     Route::get('/qua-tang-socola', 'HomeController@Socola');
-});
+    });
 
 Route::group(['namespace'=>'Admin'],function() {
     Route::group(['prefix'=>'admin', 'as' => 'admin.'],function() {

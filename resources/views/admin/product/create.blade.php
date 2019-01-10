@@ -65,12 +65,10 @@
                             <div class="form-group">
                                 <label for="description">@lang('component.product_price') *:</label>
                                 <input type="text" class="form-control" id="price" name="price" >
-                                <span>không nhập 3 số 0 cuối mỗi giá ( đơn vị vnđ)</span>
                             </div>
                             <div class="form-group">
                                 <label for="description">@lang('component.product_price_sales'):</label>
                                 <input type="text" class="form-control" id="price_sales" name="price_sales">
-                                <span>không nhập 3 số 0 cuối mỗi giá ( đơn vị vnđ)</span>
                             </div>
                             <div class="form-group">
                                     <button type="submit" class="btn btn-info">@lang('button.product_create')</button>
@@ -92,7 +90,7 @@
                                 <img class="upload-product" id="avatar_preview" onclick="uploadifle()" src="{{URL::asset('public/images/upload.png')}}" width="200px" height="200px">
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <p>Size: <span id="size">850 x 550</span></p>
+                                <p>Size: <span id="size">900 x 500 ( hệ số 1.8)</span></p>
                                 <p>Type: <span id="type">png, jpg</span></p>
                                 <p>Date Upload: {{now()->format('d/m/y')}}</p>
                             </div>
@@ -108,11 +106,9 @@
                         <div class="form-group">
                             <label for="description">@lang('component.product_categories') *:</label>
                             <select class="form-control" id="product_categories" name="product_categories">
-                                <option>Sản phẩm nguyên hộp</option>
-                                <option>Kẹo viên in hình</option>
-                                <option>Kẹo viên đen trắng</option>
-                                <option>Hoa Socola + hoa giả</option>
-                                <option>Khung ảnh socola</option>
+                                @foreach($data_category as $value)
+                                    <option>{{$value}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

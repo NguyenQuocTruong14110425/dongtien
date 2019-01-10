@@ -12,10 +12,8 @@ class ProductUpdateValidator extends AppValidator implements ValidableInterface 
      */
     protected $rules = array(
         'product_title' => 'required',
-        'product_content' => 'required',
     );
     protected $message = array(
         'product_title.required' => 'valid_product_title_required',
-        'product_content.required' => 'valid_product_content_required'
     );
 }

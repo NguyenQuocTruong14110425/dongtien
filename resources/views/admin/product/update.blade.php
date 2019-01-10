@@ -65,13 +65,11 @@
                         </div>
                         <div class="form-group">
                             <label for="description">@lang('component.product_price') *:</label>
-                            <input type="text" class="form-control" id="price" name="price" value="{{$product_destail->product_price}}">
-                            <span>không nhập 3 số 0 cuối mỗi giá ( đơn vị vnđ)</span>
+                            <input type="number" class="form-control" id="price" name="price" value="{{$product_destail->product_price}}">
                         </div>
                         <div class="form-group">
                             <label for="description">@lang('component.product_price_sales'):</label>
-                            <input type="text" class="form-control" id="price_sales" name="price_sales" value="{{$product_destail->product_price_sales}}">
-                            <span>không nhập 3 số 0 cuối mỗi giá ( đơn vị vnđ)</span>
+                            <input type="number" class="form-control" id="price_sales" name="price_sales" value="{{$product_destail->product_price_sales}}">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">@lang('button.product_update')</button>
@@ -109,11 +107,13 @@
                         <div class="form-group">
                             <label for="description">@lang('component.product_categories') *:</label>
                             <select class="form-control" id="product_categories" name="product_categories">
-                                <option>Sản phẩm nguyên hộp</option>
-                                <option>Kẹo viên in hình</option>
-                                <option>Kẹo viên đen trắng</option>
-                                <option>Hoa Socola + hoa giả</option>
-                                <option>Khung ảnh socola</option>
+                                @foreach($data_category as $value)
+                                    @if($product_destail->product_categories == $value)
+                                        <option selected>{{$value}}</option>
+                                    @else
+                                        <option>{{$value}}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -154,18 +154,5 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $('#price').pcsFormatNumber({
-            decimal_separator: ",",
-            to_fixed: 3,
-            currency: null
-        });
-        $('#price_sales').pcsFormatNumber({
-            decimal_separator: ",",
-            to_fixed: 3,
-            currency: null
-        });
-        $( "#price, #price_sales" ).focus(function() {
-            $(this).val('');
-        });
     </script>
 @endsection

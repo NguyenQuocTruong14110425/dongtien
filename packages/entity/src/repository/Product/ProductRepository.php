@@ -54,8 +54,11 @@ class ProductRepository extends BasicEntity implements RepositoryInterface {
         {
             $files = $data["product_avatar"];
             $type = "product";
-            $upload = $this->UploadResource($files,$type);
-            $data["product_avatar"] = $upload;
+            if(isset($files))
+            {
+                $upload = $this->UploadResource($files,$type);
+                $data["product_avatar"] = $upload;
+            }
             $model = $this->CreateOrUpdate($data);
             if($model)
             {
@@ -79,6 +82,16 @@ class ProductRepository extends BasicEntity implements RepositoryInterface {
         try
         {
             $this->id = $data[$this->primaryKey];
+            $files = $data["product_avatar"];
+            $type = "product";
+            if(isset($files))
+            {
+                $product = $this->find($this->id);
+                $arrID = [$this->id];
+                $this->DeleteMutilRow($arrID, $product->product_avatar);
+                $upload = $this->UploadResource($files,$type);
+                $data["product_avatar"] = $upload;
+            }
             $model = $this->CreateOrUpdate($data);
             if($model)
             {
